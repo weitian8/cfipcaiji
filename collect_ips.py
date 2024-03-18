@@ -13,7 +13,7 @@ def get_ips_from_url(url):
     except Exception as e:
         print(f"Error fetching IPs from {url}: {e}")
     return []
-
+    
 def get_location(ip):
     try:
         response = requests.get(f"http://ip-api.com/json/{ip}")
@@ -59,10 +59,7 @@ with open('ip.txt', 'w') as file:
             ip_matches = re.findall(ip_pattern, element_text)
             # 如果找到IP地址,则写入文件
             for ip in ip_matches:
-		location = get_location(ip)	    
-            	if location:
-			file.write(ip + '#' + location + '\n')
-            	else:
-			file.write(ip + '#Unknown\n')
+                location = get_location(ip)
+                file.write(ip + '#' + location + '\n')
 
 print('IP地址已保存到ip.txt文件中。')
