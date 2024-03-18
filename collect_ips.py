@@ -14,14 +14,14 @@ def get_ips_from_url(url):
         print(f"Error fetching IPs from {url}: {e}")
     return []
     
-def get_location(ip):
+def get_location(ip_matches):
     try:
-        response = requests.get(f"http://ip-api.com/json/{ip}")
+        response = requests.get(f"http://ip-api.com/json/{ip_matches}")
         data = response.json()
         if data['status'] == 'success':
             return data['countryCode']
     except Exception as e:
-        print(f"Error fetching location for IP {ip}: {e}")
+        print(f"Error fetching location for IP {ip_matches}: {e}")
     return None
         
 # 目标URL列表
