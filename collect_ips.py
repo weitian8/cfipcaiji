@@ -3,6 +3,17 @@ from bs4 import BeautifulSoup
 import re
 import os
 
+def get_ips_from_url(url):
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.text.splitlines()
+        else:
+            print(f"Failed to fetch IPs from {url}. Status code: {response.status_code}")
+    except Exception as e:
+        print(f"Error fetching IPs from {url}: {e}")
+    return []
+	
 def get_location(ip):
     try:
         response = requests.get(f"http://ip-api.com/json/{ip}")
@@ -48,7 +59,9 @@ with open('ip.txt', 'w') as file:
             ip_matches = re.findall(ip_pattern, element_text)
             # 如果找到IP地址,则写入文件
             for ip in ip_matches:
-                location = get_location(ip)
+            if location:
 		file.write(ip + '#' + location + '\n')
+            else:
+		file.write(ip + '#Unknown\n')
 
 print('IP地址已保存到ip.txt文件中。')
