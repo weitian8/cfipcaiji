@@ -50,8 +50,8 @@ with open('ip.txt', 'w') as file:
             for ip in ip_matches:
                 location = get_location(ip)
                 if location:
-					file.write(ip + '#' + location + '\n')
+			file.write(ip + '#' + location + '\n')
                 else:
-					file.write(ip + '#Unknown\n')
+			file.write(ip + '#Unknown\n')
 
 print('IP地址已保存到ip.txt文件中。')
