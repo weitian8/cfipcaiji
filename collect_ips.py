@@ -3,6 +3,17 @@ from bs4 import BeautifulSoup
 import re
 import os
 
+def get_ips_from_url(url):
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.text.splitlines()
+        else:
+            print(f"Failed to fetch IPs from {url}. Status code: {response.status_code}")
+    except Exception as e:
+        print(f"Error fetching IPs from {url}: {e}")
+    return []
+    
 def get_location(ip):
     try:
         response = requests.get(f"http://ip-api.com/json/{ip}")
