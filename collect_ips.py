@@ -14,14 +14,14 @@ def get_ips_from_url(url):
         print(f"Error fetching IPs from {url}: {e}")
     return []
     
-def get_location(ip_matches):
+def get_location(ip):
     try:
-        response = requests.get(f"http://ip-api.com/json/{ip_matches}")
+        response = requests.get(f"http://ip-api.com/json/{ip}")
         data = response.json()
         if data['status'] == 'success':
             return data['countryCode']
     except Exception as e:
-        print(f"Error fetching location for IP {ip_matches}: {e}")
+        print(f"Error fetching location for IP {ip}: {e}")
     return None
         
 # 目标URL列表
@@ -57,7 +57,7 @@ with open('ip.txt', 'w') as file:
         for element in elements:
             element_text = element.get_text()
             ip_matches = re.findall(ip_pattern, element_text)
-            location = get_location(ip_matches)
+            location = get_location(ip)
             # 如果找到IP地址,则写入文件
             for ip in ip_matches:
                 file.write(ip + '#' + location + '\n')
