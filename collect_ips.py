@@ -3,6 +3,16 @@ from bs4 import BeautifulSoup
 import re
 import os
 
+def get_location(ip):
+    try:
+        response = requests.get(f"http://ip-api.com/json/{ip}")
+        data = response.json()
+        if data['status'] == 'success':
+            return data['countryCode']
+    except Exception as e:
+        print(f"Error fetching location for IP {ip}: {e}")
+    return None
+        
 # 目标URL列表
 urls = ['https://monitor.gacjie.cn/page/cloudflare/ipv4.html', 
         'https://ip.164746.xyz'
@@ -36,9 +46,9 @@ with open('ip.txt', 'w') as file:
         for element in elements:
             element_text = element.get_text()
             ip_matches = re.findall(ip_pattern, element_text)
-            
+            location = get_location(ip_matches)
             # 如果找到IP地址,则写入文件
             for ip in ip_matches:
-                file.write(ip + '\n')
+                file.write(ip + location + '\n')
 
 print('IP地址已保存到ip.txt文件中。')
