@@ -51,11 +51,12 @@ def convert_ips(input_urls, output_files):
                 open_ports = scan_ports(ip)
                 location = get_location(ip)
                 if location:
-#                    f.write(f"{ip}:{open_ports[0]}#{location}\n")
                     f.write(f"{ip}#{location}\n")
+# f.write(f"{ip}:{open_ports[0]}#{location}\n")
+
                 else:
-#                    f.write(f"{ip}:443#Unknown\n")
                     f.write(f"{ip}#Unknown\n")
+# f.write(f"{ip}:443#Unknown\n")
 
 if __name__ == "__main__":
     input_urls = ['https://kzip.pages.dev/kzip.txt?token=mimausb8']  # 包含IP地址的txt文件的多个URL
