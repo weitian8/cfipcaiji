@@ -57,5 +57,5 @@ def convert_ips(input_urls, output_files):
 
 if __name__ == "__main__":
     input_urls = ['https://kzip.pages.dev/a.csv?token=mimausb8']  # 包含IP地址的txt文件的多个URL
-    output_files = ["'kz.txt']
+    output_files = ['kz.txt']
     convert_ips(input_urls, output_files)
