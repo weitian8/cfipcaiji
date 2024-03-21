@@ -24,7 +24,7 @@ def get_location(ip):
 
 def scan_ports(ip):
     open_ports = []
-    for port in [8443, 2053, 2083, 2087, 2096]:
+    for port in [8443, 2053, 2083, 2087]:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(1)
         result = s.connect_ex((ip, port))
@@ -47,15 +47,15 @@ def convert_ips(input_urls, output_files):
                 except socket.error:
                     f.write(f"{line}\n")  # IP地址格式不正确，直接保存原文
                     continue
-                
+
                 open_ports = scan_ports(ip)
                 location = get_location(ip)
                 if location:
                     f.write(f"{ip}#{location}\n")
                 else:
-                    f.write(f"{ip}#Unknown\n")
+                    f.write(f"{ip}#No\n")
 
 if __name__ == "__main__":
-    input_urls = ['https://kzip.pages.dev/kzip.txt?token=mimausb8']  # 包含IP地址的txt文件的多个URL
-    output_files = ['kz.txt']
+    input_urls = ['https://kzip.pages.dev/a.csv?token=mimausb8']  # 包含IP地址的txt文件的多个URL
+    output_files = ["'kz.txt']
     convert_ips(input_urls, output_files)
