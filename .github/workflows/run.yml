@@ -31,7 +31,7 @@ jobs:
         pip install beautifulsoup4
 
     - name: Run Conversion Script
-      run: python kz.py  # 执行Python脚本进行IP地址转换
+      run: python main.py  # 执行Python脚本进行IP地址转换
 
     - name: Commit Changes
       run: |
